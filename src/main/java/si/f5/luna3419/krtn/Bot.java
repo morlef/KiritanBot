@@ -20,9 +20,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Bot {
     @Getter private static Bot instance;
@@ -109,12 +107,12 @@ public class Bot {
             return;
         }
 
-        logger.info(user.getUsername() + ":");
-        logger.info(e.getMessage().getContent());
-
         if (user.isBot()) {
             return;
         }
+
+        logger.info(user.getUsername() + ":");
+        logger.info(e.getMessage().getContent());
 
         if (e.getMessage().getContent().contains(config.getName())) {
             String[] args = Utils.splitWithSpaces(e.getMessage().getContent().replace(config.getName() + " ", "").replace(config.getName() + "　", ""));
@@ -138,6 +136,12 @@ public class Bot {
 
         result = Utils.s(user, result, null);
 
+        if (result.contains("||")) {
+            List<String> list = Arrays.asList(result.split("\\|\\|"));
+            Collections.shuffle(list);
+            result = list.get(0);
+        }
+
         logger.info(">> " + result);
 
         e.getMessage().getChannel().block().createMessage(MessageCreateSpec.builder().content(result).messageReference(e.getMessage().getId()).build()).block();
@@ -145,7 +149,7 @@ public class Bot {
 
     @SuppressWarnings("ConstantConditions")
     public void onCommand(User sender, Message message, String[] args) {
-        List<String> list = Arrays.asList(args);
+        List<String> list = new ArrayList<>(Arrays.asList(args));
 
         String name = list.get(0);
         list.remove(0);
