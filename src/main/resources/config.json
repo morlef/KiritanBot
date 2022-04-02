@@ -1,0 +1,15 @@
+{
+  "token": "",
+  "missing": "何ですか?",
+  "name": "/kiritan",
+  "description": "きりたんのコマンドです",
+  "guild": 100000000000000000,
+  "messages": {
+    "おはよう": "おはようございます!"
+  },
+  "commands": {
+    "versions": "version 1.0",
+    "v": "${commands.versions}",
+    "say": "${0}"
+  }
+}
