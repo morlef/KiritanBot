@@ -3,16 +3,11 @@ package si.f5.luna3419.krtn;
 import discord4j.core.object.entity.User;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Utils {
     private static final Pattern pattern = Pattern.compile("\\$\\{.*}");
-
-    public static long longOrDefault(Long l, long def) {
-        return Objects.requireNonNullElse(l, def);
-    }
 
     public static String s(User user, String text, @Nullable String[] args) {
         text = replaceIfContains(text, "${user}", user.getUsername());
