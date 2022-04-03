@@ -10,8 +10,6 @@ Java 17で制作されています。
 |token|DiscordのToken|
 |missing|コマンドの記述が間違えていたときのメッセージ|
 |name|コマンド名|
-|description|コマンドの説明|
-|guild|スラッシュコマンドを追加するサーバーID|
 |messages|応答するメッセージとその返答|
 |commands|コマンド|
 
